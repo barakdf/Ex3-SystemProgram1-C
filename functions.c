@@ -8,7 +8,6 @@
 #define FALSE 0
 
 
-//int gValue(char);
 int gValue(char c) {
     if (isalpha(c)) {
         int ans = tolower(c);
@@ -19,13 +18,8 @@ int gValue(char c) {
 
 
 void Gematria(char word[], char text[], char str[]) {
-//    int test = gValue('i') + gValue('n') + gValue('.');
-//    int test2 = gValue('f') + gValue('i') + gValue('s') + gValue('h');
-//    printf("TEST GEM: ==> %d\n", test);
-//    printf("TEST GEM: ==> %d\n", test2);
 
     strcat(str, "Gematria Sequences: ");
-//    str = "Gematria Sequences: ";
     int first_seq = TRUE;
     int word_g = 0;
     for (int i = 0; i < strlen(word); ++i) {
@@ -59,14 +53,11 @@ void Gematria(char word[], char text[], char str[]) {
     }
     str[str_index] = '\0';
     printf("%s\n", str);
-//    fflush(stdout);
 }
 
 int isEqualString(const char s1[], const char s2[], unsigned long n) {
     int len = (int) n;
-//    if(s2[0] == ' ') {
-//        return 0;
-//    }
+
     for (int i = 1, j = 1; j < len; ++i, ++j) {
         while (s1[i] != s2[j] && s2[j] == ' ') {
             j++;
@@ -112,8 +103,6 @@ void Atbash(char word[], char text[], char str[]) {
     reversed(temp_word, revers);
     revers[len_letter] = '\0';
 
-//    printf("REVERSE: %s\n", revers);
-
     strcat(str, "");
     printf("Atbash Sequences:%c", ' ');
     unsigned long str_index = 0;
@@ -140,7 +129,6 @@ void Atbash(char word[], char text[], char str[]) {
     }
     str[str_index] = '\0';
     printf("%s\n", str);
-//    fflush(stdout);
 }
 
 bool contain(char word[], char container[], char c) {
@@ -178,9 +166,7 @@ bool tofes(int i, int j, char text[], char word[]) {
     }
     for (int k = 0; k < word_len; ++k) {
         contain[(int)word[k]] += 1;
-//        printf(", %d", contain[(int)word[k]]);
     }
-//    printf("\n");
     for (int k = i; k <= j; ++k) {
         bool flag = false;
         if(text[k] == ' ') {
@@ -190,10 +176,7 @@ bool tofes(int i, int j, char text[], char word[]) {
         for (int l = 0; l < word_len; ++l) {
 
             if(temp == word[l]) {
-//                printf("word %c " , word[l]);
-//                printf("temp %c ", temp);
                 if(contain[word[l]] > 0) {
-//                    printf("true \n");
                     flag = true;
                     contain[word[l]] -= 1;
                     break;
@@ -201,11 +184,9 @@ bool tofes(int i, int j, char text[], char word[]) {
             }
         }
         if(!flag) {
-//            printf("------------->\n");
             return false;
         }
     }
-//    printf("------------->\n");
     return true;
 }
 
@@ -235,84 +216,11 @@ void Anagram(char word[], char text[], char str[]) {
                 str[str_index++] = text[k];
             }
             first_seq = false;
-//            str[str_index++] = '\0';
         }
         j++;
         i++;
     }
     str[str_index] = '\0';
     printf("%s", str);
-//    fflush(stdout);
 }
-
-//
-//    strcat(str, "Anagram Sequences: ");
-//    int first_seq = TRUE;
-//    int j = 0;
-//    unsigned long an_index = strlen(str);
-//    unsigned long total_string_len = strlen(text);
-//    char container[strlen(text)];
-//    container[0] = '\0';
-//    int con_index = 0, forward = 0;
-//    unsigned long num_of_chars = 0, word_len = strlen(word);
-//    for (int i = 0; i <= total_string_len;) {
-//        if(text[j] == '!') {
-//            printf("HEREE %d ", j);
-//        }
-//        if (text[j] == ' ') {
-//            container[con_index] = ' ';
-//            con_index++;
-//            container[con_index] = '\0';
-//            j++;
-//            continue;
-//        } else if (contain(word, container + forward, text[j])) {
-//            container[con_index++] = text[j];
-//            container[con_index] = '\0';
-//            num_of_chars++;
-//            j++;
-//        } else {
-//            if (!contain(word, container + forward + 1, text[j])) {
-//                j++;
-//                i = j;
-//                forward = i;
-//            } else {
-//
-//
-//                while (text[i] == ' ') {
-//                    i++;
-//                    forward++;
-//                }
-//                i++;
-//                num_of_chars--;
-//                forward++;
-//
-////            num_of_chars = 0;
-//            }
-//            container[++con_index + forward] = '\0';
-//        }
-//        if (num_of_chars == word_len) {
-//            printf("IN CHAR %d ", i);
-//            if (!first_seq) {
-//                str[an_index++] = '~';
-//            }
-//            for (int k = i; k < j; ++k) {
-//                if(text[k] == ' ') {
-//                    i++;
-//                    forward++;
-//                    k++;
-//                }
-//                if(text[k] == ' ') {// check this;
-//                    continue;
-//                }
-//                str[an_index++] = text[k];
-////                printf("HERE %c\n", text[k]);
-//            }
-//            first_seq = FALSE;
-//            i++;
-//            forward++;
-//            num_of_chars -= 1;
-//        }
-//    }
-//    str[an_index] = '\0';
-////    printf("LEN__ %lu\n", strlen(str));
 
