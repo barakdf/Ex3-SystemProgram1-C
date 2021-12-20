@@ -170,57 +170,132 @@ bool contain(char word[], char container[], char c) {
     return true;
 }
 
-void Anagram(char word[], char text[], char str[]) {
-//
-    strcat(str, "Anagram Sequences: ");
-    int first_seq = TRUE;
-    int j = 0;
-    unsigned long an_index = strlen(str);
-    unsigned long total_string_len = strlen(text);
-    char container[strlen(text)];
-    container[0] = '\0';
-    int con_index = 0, forward = 0;
-    unsigned long num_of_chars = 0, word_len = strlen(word);
-    for (int i = 0; i < total_string_len;) {
-        if (text[j] == ' ') {
-            container[con_index] = ' ';
-            con_index++;
-            container[con_index] = '\0';
-            j++;
+bool tofes(int i, int j, char text[], char word[]) {
+    unsigned long word_len = strlen(word);
+    int contain[word_len];
+    for (int k = 0; k < word_len; ++k) {
+        contain[k] = (int )word[k];
+    }
+    for (int k = i; k <= j; ++k) {
+        bool flag = false;
+        if(text[k] == ' ') {
             continue;
-        } else if (contain(word, container + forward, text[j])) {
-            container[con_index++] = text[j];
-            container[con_index] = '\0';
-            num_of_chars++;
-            j++;
-        } else {
-            j++;
-            i = j;
-            forward = i;
-            container[++con_index] = '\0';
-
-            num_of_chars = 0;
         }
-        if (num_of_chars == word_len) {
-            if (!first_seq) {
-                str[an_index++] = '~';
+        char temp = text[k];
+        for (int l = 0; l < word_len; ++l) {
+            if(temp == contain[l]) {
+                flag = true;
+                contain[l] = 0;
             }
-            for (int k = i; k < j; ++k) {
-                if(text[k] == ' ') { // check this;
-                    continue;
-                }
-                str[an_index++] = text[k];
-                // printf("HERE %c\n", text[k]);
-            }
-            first_seq = FALSE;
-            i++;
-            forward++;
-            num_of_chars -= 1;
+        }
+        if(!flag) {
+            return false;
         }
     }
-    str[an_index] = '\0';
-//    printf("LEN__ %lu\n", strlen(str));
+    return true;
+}
 
+void Anagram(char word[], char text[], char str[]) {
+    strcat(str, "");
+    printf("Anagram Sequences:%c", ' ');
+
+    bool first_seq = true;
+    int str_index = 0;
+    unsigned long len = strlen(text), j = strlen(word);
+    int i = 0;
+    while (j < len) {
+        if(text[i] == ' ') {
+            i++;
+        }
+        if(text[j] == ' ') {
+            j++;
+        }
+        if(tofes(i, j, text, word)) {
+            if(!first_seq) {
+                str[str_index++] = '~';
+            }
+            for (int k = i; k <= j; ++k) {
+                str[str_index++] = text[k];
+            }
+            first_seq = false;
+//            str[str_index++] = '\0';
+        }
+        j++;
+        i++;
+    }
+    str[str_index] = '\0';
     printf("%s", str);
 //    fflush(stdout);
 }
+
+//
+//    strcat(str, "Anagram Sequences: ");
+//    int first_seq = TRUE;
+//    int j = 0;
+//    unsigned long an_index = strlen(str);
+//    unsigned long total_string_len = strlen(text);
+//    char container[strlen(text)];
+//    container[0] = '\0';
+//    int con_index = 0, forward = 0;
+//    unsigned long num_of_chars = 0, word_len = strlen(word);
+//    for (int i = 0; i <= total_string_len;) {
+//        if(text[j] == '!') {
+//            printf("HEREE %d ", j);
+//        }
+//        if (text[j] == ' ') {
+//            container[con_index] = ' ';
+//            con_index++;
+//            container[con_index] = '\0';
+//            j++;
+//            continue;
+//        } else if (contain(word, container + forward, text[j])) {
+//            container[con_index++] = text[j];
+//            container[con_index] = '\0';
+//            num_of_chars++;
+//            j++;
+//        } else {
+//            if (!contain(word, container + forward + 1, text[j])) {
+//                j++;
+//                i = j;
+//                forward = i;
+//            } else {
+//
+//
+//                while (text[i] == ' ') {
+//                    i++;
+//                    forward++;
+//                }
+//                i++;
+//                num_of_chars--;
+//                forward++;
+//
+////            num_of_chars = 0;
+//            }
+//            container[++con_index + forward] = '\0';
+//        }
+//        if (num_of_chars == word_len) {
+//            printf("IN CHAR %d ", i);
+//            if (!first_seq) {
+//                str[an_index++] = '~';
+//            }
+//            for (int k = i; k < j; ++k) {
+//                if(text[k] == ' ') {
+//                    i++;
+//                    forward++;
+//                    k++;
+//                }
+//                if(text[k] == ' ') {// check this;
+//                    continue;
+//                }
+//                str[an_index++] = text[k];
+////                printf("HERE %c\n", text[k]);
+//            }
+//            first_seq = FALSE;
+//            i++;
+//            forward++;
+//            num_of_chars -= 1;
+//        }
+//    }
+//    str[an_index] = '\0';
+////    printf("LEN__ %lu\n", strlen(str));
+
