@@ -114,8 +114,9 @@ void Atbash(char word[], char text[], char str[]) {
 
 //    printf("REVERSE: %s\n", revers);
 
-    strcat(str, "Atbash Sequences: ");
-    unsigned long str_index = strlen(str);
+    strcat(str, "");
+    printf("Atbash Sequences:%c", ' ');
+    unsigned long str_index = 0;
     if (len_text >= len_letter) {
         for (int i = 0; i <= len_text - len_letter; i++) {
             if (isEqualString(temp_word, temp_text + i, len_letter)) {
@@ -137,7 +138,7 @@ void Atbash(char word[], char text[], char str[]) {
             }
         }
     }
-    str[str_index] = '\0';
+    str[str_index+1] = '\0';
     printf("%s\n", str);
     fflush(stdout);
 }
@@ -158,7 +159,7 @@ bool contain(char word[], char container[], char c) {
         for (int i = 0; i < container_len; ++i) {
             if (container[i] == c) {
                 shown --;
-                if(shown < 0) {
+                if(shown == 0) {
                     return false;
                 }
             }
@@ -177,22 +178,27 @@ void Anagram(char word[], char text[], char str[]) {
     unsigned long an_index = strlen(str);
     unsigned long total_string_len = strlen(text);
     char container[strlen(text)];
-    int con_index = 0;
+    container[0] = '\0';
+    int con_index = 0, forward = 0;
     unsigned long num_of_chars = 0, word_len = strlen(word);
     for (int i = 0; i < total_string_len;) {
         if (text[j] == ' ') {
             container[con_index] = ' ';
             con_index++;
+            container[con_index] = '\0';
             j++;
             continue;
-        } else if (contain(word, container, text[j])) {
+        } else if (contain(word, container + forward, text[j])) {
             container[con_index++] = text[j];
+            container[con_index] = '\0';
             num_of_chars++;
             j++;
         } else {
             j++;
             i = j;
-            *container = container[i];
+            forward = i;
+            container[++con_index] = '\0';
+
             num_of_chars = 0;
         }
         if (num_of_chars == word_len) {
@@ -201,6 +207,7 @@ void Anagram(char word[], char text[], char str[]) {
             }
             for (int k = i; k < j; ++k) {
                 if(text[k] == ' ') { // check this;
+                    j++;
                     continue;
                 }
                 str[an_index++] = text[k];
@@ -208,7 +215,7 @@ void Anagram(char word[], char text[], char str[]) {
             }
             first_seq = FALSE;
             i++;
-            *container = container[i];
+            forward++;
             num_of_chars -= 1;
         }
     }
