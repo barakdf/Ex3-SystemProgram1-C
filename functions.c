@@ -59,7 +59,7 @@ void Gematria(char word[], char text[], char str[]) {
     }
     str[str_index] = '\0';
     printf("%s\n", str);
-    fflush(stdout);
+//    fflush(stdout);
 }
 
 int isEqualString(const char s1[], const char s2[], unsigned long n) {
@@ -215,6 +215,6 @@ void Anagram(char word[], char text[], char str[]) {
     str[an_index] = '\0';
 //    printf("LEN__ %lu\n", strlen(str));
 
-    printf("%s\n", str);
-    fflush(stdout);
+    printf("%s", str);
+//    fflush(stdout);
 }
