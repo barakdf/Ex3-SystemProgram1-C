@@ -172,10 +172,15 @@ bool contain(char word[], char container[], char c) {
 
 bool tofes(int i, int j, char text[], char word[]) {
     unsigned long word_len = strlen(word);
-    int contain[word_len];
-    for (int k = 0; k < word_len; ++k) {
-        contain[k] = (int )word[k];
+    int contain[255];
+    for (int k = 0; k <= word_len; ++k) {
+        contain[(int)word[k]] = 0;
     }
+    for (int k = 0; k < word_len; ++k) {
+        contain[(int)word[k]] += 1;
+//        printf(", %d", contain[(int)word[k]]);
+    }
+//    printf("\n");
     for (int k = i; k <= j; ++k) {
         bool flag = false;
         if(text[k] == ' ') {
@@ -183,15 +188,24 @@ bool tofes(int i, int j, char text[], char word[]) {
         }
         char temp = text[k];
         for (int l = 0; l < word_len; ++l) {
-            if(temp == contain[l]) {
-                flag = true;
-                contain[l] = 0;
+
+            if(temp == word[l]) {
+//                printf("word %c " , word[l]);
+//                printf("temp %c ", temp);
+                if(contain[word[l]] > 0) {
+//                    printf("true \n");
+                    flag = true;
+                    contain[word[l]] -= 1;
+                    break;
+                }
             }
         }
         if(!flag) {
+//            printf("------------->\n");
             return false;
         }
     }
+//    printf("------------->\n");
     return true;
 }
 
@@ -201,11 +215,14 @@ void Anagram(char word[], char text[], char str[]) {
 
     bool first_seq = true;
     int str_index = 0;
-    unsigned long len = strlen(text), j = strlen(word);
+    unsigned long len = strlen(text), j = strlen(word) - 1;
     int i = 0;
     while (j < len) {
         if(text[i] == ' ') {
             i++;
+            if((j-i) < strlen(word) - 1) {
+                j++;
+            }
         }
         if(text[j] == ' ') {
             j++;
