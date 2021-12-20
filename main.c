@@ -39,7 +39,6 @@ int main() {
     Atbash(word, text, str);
     str[0] = '\0';
     Anagram(word, text, str);
-    return 1;
 
 
 }
