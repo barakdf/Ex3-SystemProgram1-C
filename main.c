@@ -14,9 +14,11 @@ int main() {
     char text[TXT];
     char file[TXT + WORD];
 
-    scanf("%[^'~']s", file);
+
+    scanf("%[^'~']s", file); //scanning the file until char '~'
     file[strlen(file)] = '~';
     int index = 0;
+    // insert the word from file.
     while (file[index] != ' ' && file[index] != '\n' && file[index] != '\t') {
         word[index] = file[index];
         index++;
@@ -25,6 +27,7 @@ int main() {
 
     index++;
     int text_i = 0;
+    //insert the rest to text.
     while ('~' != file[index]) {
         text[text_i++] = file[index++];
     }
@@ -36,6 +39,7 @@ int main() {
     Atbash(word, text, str);
     str[0] = '\0';
     Anagram(word, text, str);
+    return 1;
 
 
 }

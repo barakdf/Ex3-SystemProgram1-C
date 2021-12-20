@@ -8,7 +8,7 @@
 #define FALSE 0
 
 
-int gValue(char c) {
+int gValue(char c) { //return the gematria value.
     if (isalpha(c)) {
         int ans = tolower(c);
         return ans - 96;
@@ -29,14 +29,15 @@ void Gematria(char word[], char text[], char str[]) {
     int j = 0;
     unsigned long str_index = strlen(str), total_string_len = strlen(text);
     for (int i = 0; j < total_string_len;) {
-        if (!isalpha(text[i])) {
+        if (!isalpha(text[i])) { // check for minimal-word definition
             i++;
             continue;
         }
+        // check and calculate the gematria value to the total sum.
         if (g_sum + gValue(text[j]) < word_g || !isalpha(text[j])) {
             g_sum += gValue(text[j]);
             j++;
-        } else if (g_sum + gValue(text[j]) == word_g) {
+        } else if (g_sum + gValue(text[j]) == word_g) { //in case value is equal.
             g_sum += gValue(text[j]);
             if (!first_seq) {
                 str[str_index++] = '~';
@@ -46,7 +47,7 @@ void Gematria(char word[], char text[], char str[]) {
                 first_seq = FALSE;
             }
             j++;
-        } else {
+        } else { //keep searching in text.
             g_sum -= gValue(text[i]);
             i++;
         }
@@ -55,7 +56,7 @@ void Gematria(char word[], char text[], char str[]) {
     printf("%s\n", str);
 }
 
-int isEqualString(const char s1[], const char s2[], unsigned long n) {
+int isEqualString(const char s1[], const char s2[], unsigned long n) { //check equality for every substring.
     int len = (int) n;
 
     for (int i = 1, j = 1; j < len; ++i, ++j) {
@@ -71,14 +72,14 @@ int isEqualString(const char s1[], const char s2[], unsigned long n) {
     return len;
 }
 
-void reversed(char word1[], char word2[]) {
+void reversed(char word1[], char word2[]) { //get the reversed opposite word.
     unsigned long word_len = strlen(word1);
     for (int i = 0; i < word_len; ++i) {
         word2[i] = word1[word_len - 1 - i];
     }
 }
 
-void castAtbash(char word[]) {
+void castAtbash(char word[]) { //translating to opposite chars.
     unsigned long len = strlen(word);
     for (int i = 0; i < len; ++i) {
         if (word[i] >= 'a' && word[i] <= 'z') {
@@ -158,7 +159,7 @@ bool contain(char word[], char container[], char c) {
     return true;
 }
 
-bool tofes(int i, int j, char text[], char word[]) {
+bool tofes(int i, int j, char text[], char word[]) { //check for every substring if 'tofes' by the definitions.
     unsigned long word_len = strlen(word);
     int contain[255];
     for (int k = 0; k <= word_len; ++k) {
