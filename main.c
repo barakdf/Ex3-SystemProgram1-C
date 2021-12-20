@@ -28,7 +28,7 @@ int main() {//temporary main for check
 //        i++;
 //    }
     file[strlen(file)] = '~';
-    printf("FILE ==> %s\n", file);
+    // printf("FILE ==> %s\n", file);
     int index = 0;
     while (file[index] != ' ' && file[index] != '\n' && file[index] != '\t') {
         word[index] = file[index];
