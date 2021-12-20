@@ -138,9 +138,9 @@ void Atbash(char word[], char text[], char str[]) {
             }
         }
     }
-    str[str_index+1] = '\0';
+    str[str_index] = '\0';
     printf("%s\n", str);
-    fflush(stdout);
+    // fflush(stdout);
 }
 
 bool contain(char word[], char container[], char c) {
