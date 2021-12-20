@@ -140,7 +140,7 @@ void Atbash(char word[], char text[], char str[]) {
     }
     str[str_index] = '\0';
     printf("%s\n", str);
-    // fflush(stdout);
+//    fflush(stdout);
 }
 
 bool contain(char word[], char container[], char c) {
@@ -207,11 +207,10 @@ void Anagram(char word[], char text[], char str[]) {
             }
             for (int k = i; k < j; ++k) {
                 if(text[k] == ' ') { // check this;
-                    j++;
                     continue;
                 }
                 str[an_index++] = text[k];
-//                printf("HERE %c\n", text[k]);
+                // printf("HERE %c\n", text[k]);
             }
             first_seq = FALSE;
             i++;
